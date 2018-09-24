@@ -284,6 +284,9 @@ class BLEParser(threading.Thread):
             index = 6
             # event_subcode is two-bytes given in reverse (endian mismatch?)
             event_subcode = data[3:5][::-1]  # reverse byte order [::-1]
+            if event_subcode.encode('hex') == '0607':
+                L = [5,27]
+                event_subcode=''.join(map(chr,L))
             event_status = data[5]
 
             try:
